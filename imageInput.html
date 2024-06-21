@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Estilos para a estrutura de grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 2fr; /* Define três colunas de larguras proporcionais */
+            gap: 20px; /* Espaçamento entre as colunas */
+            height: 100%;
+            grid-template-rows: 100vh; /* Altura da linha do grid */
+        }
+
+        /* Estilos para cada coluna */
+        .col {
+            padding: 40px; /* Espaçamento interno */
+            background-color: #f0f0f0; /* Cor de fundo */
+            border: 1px solid #ccc; /* Borda */
+            position: relative; /* Permite posicionar elementos filhos absolutamente */
+        }
+
+        /* Estilos para a imagem dentro da coluna */
+        .col img {
+            max-width: 100%; /* Imagem ocupa 100% da largura disponível */
+            height: auto; /* Mantém proporção da imagem */
+            border-radius: 50%; /* Borda arredondada para criar um círculo */
+            width: 300px; /* Largura da imagem */
+            height: 200px; /* Altura da imagem */
+        }
+
+        /* Container para a imagem */
+        .image-container {
+            position: relative; /* Permite posicionar elementos filhos absolutamente */
+        }
+
+        /* Estilos para a sobreposição de texto quando hover na imagem */
+        .image-container:hover img {
+            filter: brightness(0.7); /* Reduz a luminosidade da imagem */
+            transition: filter 0.3s ease; /* Transição suave para o filtro */
+        }
+
+        /* Estilos para o texto "alterar" sobre a imagem */
+        .image-container:hover .overlay-text {
+            display: block; /* Mostra o texto quando hover na imagem */
+        }
+
+        /* Estilos para o texto "alterar" */
+        .overlay-text {
+            display: none; /* Esconde por padrão */
+            position: absolute; /* Posicionamento absoluto em relação ao container pai */
+            top: 50%; /* Alinha o topo a 50% do container pai */
+            left: 50%; /* Alinha a esquerda a 50% do container pai */
+            transform: translate(-50%, -50%); /* Centraliza o texto vertical e horizontalmente */
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+            color: white; /* Cor do texto */
+            padding: 5px 10px; /* Espaçamento interno */
+            border-radius: 5px; /* Borda arredondada */
+            cursor: pointer; /* Cursor de mão ao passar o mouse */
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrutura de grid -->
+    <div class="grid-container">
+        <!-- Coluna 1 -->
+        <div class="col">Coluna 1
+            <!-- Input de arquivo oculto para selecionar imagem -->
+            <input type="file" id="inputimg" style="display:none" accept="image/*">
+
+            <!-- Container da imagem -->
+            <div class="image-container">
+                <!-- Imagem de perfil -->
+                <img src="img_avatar.png" id="avatar" alt="Avatar" onclick="selectImg()">
+                <!-- Sobreposição de texto -->
+                <label for="inputimg" class="overlay-text">Alterar</label> <!-- Texto "alterar" sobre a imagem -->
+            </div>
+        </div>
+        <!-- Coluna 2 -->
+        <div class="col">Coluna 2</div>
+        <!-- Coluna 3 -->
+        <div class="col">Coluna 3</div>
+    </div>
+
+    <!-- Script JavaScript para selecionar imagem -->
+    <script>
+        function selectImg(){
+            var input = document.getElementById('inputimg');
+            input.click();
+
+            input.addEventListener('change', function() {
+                var file = input.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function(e){
+                    var imagem = document.getElementById('avatar');
+                    imagem.src = e.target.result; /* Carrega a imagem selecionada */
+                    imagem.alt = file.name; /* Define o atributo alt com o nome do arquivo */
+                };
+                reader.readAsDataURL(file); /* Converte o arquivo para URL de dados */
+            });
+        }
+    </script>
+</body>
+</html>

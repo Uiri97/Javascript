@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição de Nome</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Seu nome:</h2>
+        <div id="nomeContainer">
+            <span id="nomeUsuario">Yuri</span>
+            <button onclick="editarNome()">Editar</button>
+        </div>
+        <div id="edicaoNome" style="display: none;">
+            <input type="text" id="novoNomeInput">
+            <button onclick="salvarNome()">Salvar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
